@@ -12,7 +12,7 @@ jobs:
       CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       COMMIT_ID: ${{ github.event.pull_request.head.sha }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -32,7 +32,7 @@ jobs:
       CLEARML_API_SECRET_KEY: ${{ secrets.CLEARML_API_SECRET_KEY }}
       CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
       COMMIT_ID: ${{ github.event.pull_request.head.sha }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -51,7 +51,7 @@ jobs:
       CLEARML_API_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
       CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
       CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
