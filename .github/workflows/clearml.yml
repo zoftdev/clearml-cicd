@@ -12,7 +12,7 @@ jobs:
       CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       COMMIT_ID: ${{ github.event.pull_request.head.sha }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -32,7 +32,7 @@ jobs:
       CLEARML_API_SECRET_KEY: ${{ secrets.CLEARML_API_SECRET_KEY }}
       CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
       COMMIT_ID: ${{ github.event.pull_request.head.sha }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -48,10 +48,10 @@ jobs:
 
   test-remote-runnable:
     env:
-      CLEARML_API_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
-      CLEARML_API_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      CLEARML_API_ACCESS_KEY: ${{ secrets.CLEARML_API_ACCESS_KEY }}
+      CLEARML_API_SECRET_KEY: ${{ secrets.CLEARML_API_SECRET_KEY }}
       CLEARML_API_HOST: ${{ secrets.CLEARML_API_HOST }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
@@ -70,4 +70,4 @@ jobs:
             clearml-task --project 'Github CICD Video' --name cicd_test --branch ${{ github.head_ref }} --script task.py --requirements requirements.txt --skip-task-init --queue default | rg -o 'Task id=(.*) sent' -r '$1'
           )" >> $GITHUB_OUTPUT
       - name: Poll for task progress
-        run: python check_clearml_task_running.py "${{ steps.launch_task.outputs.TASK_ID }}"
+        run: python check_remotely_runnable.py "${{ steps.launch_task.outputs.TASK_ID }}"
